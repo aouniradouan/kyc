@@ -1,0 +1,282 @@
+{% include 'layout/master/header.blade.html' %}
+
+  <body>
+
+    <div class="ugf-nav">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <div class="navigation">
+              <div class="logo">
+                <a href="#"><img src="../images/logo-dark.png" class="img-fluid" alt=""><span>Job Application</span></a>
+              </div>
+              <div class="nav-btns">
+                <a href="#" class="get">Open Job Post</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ugf-bg ufg-main-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+          {% if CheckRequestSuccess == 1 %}
+              <div class="alert alert-success">Thank You, We have received your job application request, we will contact you as soon as possible.</div>
+          {% endif %}
+
+            <div class="ugf-form">
+              <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" value="{{ CSRF_TOKEN }}" name="CSRF_TOKEN" id="CSRF_TOKEN">
+                <div class="input-block">
+                  <h4>Personal Information</h4>
+                  <div class="row">
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="inputFname">Select the post</label>
+	                        <select class="form-control" id="JobSelection" name="Job-id">
+	                          	<option selected="" hidden="">Select</option>
+	                        {% for Jobs in Jobslist %}
+	                          	<option value="{{ Jobs.id }}">{{ Jobs.title }}</option>
+	                        {% endfor %}
+	                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col-md-12" id="JobInformations"></div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputFname">First Name</label>
+                        <input type="text" class="form-control" id="inputFname" placeholder="e.g. Redwan" name="fname">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputLname">Last Name</label>
+                        <input type="text" class="form-control" id="inputLname" placeholder="e.g. Aouni" name="sname">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group country-select">
+                        <label for="inputCountry">Country of Nationality</label>
+                        <div class="select-input choose-country">
+                          <span></span>
+                            <select id="inputCountry" class="form-control" name="Nationality">
+                                <option selected="" hidden="">Nationality</option>
+                            {% for Nationality in Nationalitylist %}
+                              	<option value="{{ Nationality.country_code }}">{{ Nationality.country_enNationality }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputDate">Date of Birth</label>
+                        <div class="birth-date">
+                          <div class="select-input birth-date-input">
+                            <span></span>
+                            <select id="inputDate" class="form-control" name="Birth-Day">
+                              <option selected="" hidden="">Day</option>
+            							{% for Day in 1..31 %}
+            								<option value="{{ Day }}">{{ Day }}</option>
+            							{% endfor %}
+                            </select>
+                          </div>
+                          <div class="select-input birth-date-input">
+                            <span></span>
+                            <select id="inputDate" class="form-control" name="Birth-Month">
+                              <option selected="" hidden="">Month</option>
+              							{% for Month in 1..12 %}
+              								<option value="{{ Month }}">{{ Month }}</option>
+              							{% endfor %}
+                            </select>
+                          </div>
+                          <div class="select-input birth-date-input">
+                            <span></span>
+                            <select id="inputDate" class="form-control" name="Birth-year">
+                              <option selected="" hidden="">Year</option>
+            							{% for Year in 1970..2003 %}
+            								<option value="{{ Year }}">{{ Year }}</option>
+            							{% endfor %}
+                          </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group country-select">
+                        <label for="inputCountry">Country of Residence</label>
+                        <div class="select-input choose-country">
+                          <span></span>
+                            <select id="inputCountry" class="form-control" name="Residence-Country">
+                              <option selected="" hidden="">Country</option>
+                            {% for country in Countrieslist %}
+                              	<option value="{{ country.country_code }}">{{ country.country_enName }}</option>
+                            {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="state">State/Province</label>
+                        <input type="text" class="form-control" id="state" placeholder="e.g. New York" name="State">
+                      </div>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" class="form-control" id="city" placeholder="e.g. New York" name="City">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="zip">Post Code</label>
+                        <input type="tel" maxlength="5" class="form-control" id="zip" placeholder="e.g. 0000" name="Zip-Code">
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputFname">E-mail</label>
+                        <input type="email" class="form-control" placeholder="job@apply.com" name="email">
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="inputLname">Phone Number</label>
+                        <input type="tel" class="form-control" placeholder="+1" name="phone">
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                      <div class="form-group country-select">
+                        <label for="job-experience">Work Experiance</label>
+                        <div class="select-input">
+                          <span></span>
+                            <select id="job-experience" class="form-control" name="Work-Experience">
+                              <option selected="" hidden="">Select</option>
+                              	<option value="-1">Less then 1 Year</option>
+                              	<option value="2">2 Years</option>
+                              	<option value="3">3 Years</option>
+                              	<option value="4">4 Years</option>
+                              	<option value="5">5 Years</option>
+                              	<option value="+5">More then 5 Years</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="bio">Resume </label>
+                        <textarea class="form-control" id="bio" name="Resume"></textarea>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group">
+                    <label for="">Gender</label>
+                    <div class="check-gender">
+                      <div class="custom-radio">
+                        <input type="radio" name="Gender" class="custom-control-input" id="Gmale" value="male" required>
+                        <label class="custom-control-label" for="Gmale">Male</label>
+                      </div>
+                      <div class="custom-radio">
+                        <input type="radio" name="Gender" class="custom-control-input" id="Gfemale" value="female" required>
+                        <label class="custom-control-label" for="Gfemale">Female</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="input-block">
+                  <h4>Upload documents</h4>
+                  <p>CV, certificates or proof of achievements here.</p>
+                  <div class="documents-upload-wrap">
+
+                    <div class="tab-content" id="myTabContent">
+                      <div class="tab-pane fade show active" id="CV" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="documents-upload">
+                          <div class="upload-item">
+                            <input type="file" id="input1" class="input-file" name="Cv-Img" hidden/>
+                            <label class="btn-upload" for="input1" role="button">
+                              <img src="{{ TemplateResources }}/assets/skyline/images/cloud.png">
+                              <div id="p-input1" class="preview-box"></div>
+                            </label>
+                            <div class="upload-direction"><span class="text">CV</span><a href="#"><img src="images/download.png" alt=""></a></div>
+                          </div>
+                          <div class="upload-item">
+                            <input type="file" id="input2" class="input-file" name="Certificate-Img" hidden/>
+                            <label class="btn-upload" for="input2" role="button">
+                              <img src="{{ TemplateResources }}/assets/skyline/images/cloud.png">
+                              <div  id="p-input2" class="preview-box"></div>
+                            </label>
+                            <div class="upload-direction"><span class="text">Certificate</span><a href="#"><img src="images/download.png" alt=""></a></div>
+                          </div>
+                          <div class="upload-item">
+                            <input type="file" id="input3" class="input-file" name="Achievement-Img" hidden/>
+                            <label class="btn-upload" for="input3" role="button">
+                              <img src="{{ TemplateResources }}/assets/skyline/images/cloud.png">
+                              <div  id="p-input3" class="preview-box"></div>
+                            </label>
+                            <div class="upload-direction"><span class="text">Achievement proof</span><a href="#"><img src="images/download.png" alt=""></a></div>
+                          </div>
+                        </div>
+                        <!-- Conditions -->
+                      </div>
+                    </div>
+                  </div>  
+                  <div class="form-group">
+                    <div class="custom-checkbox">
+                      <input type="checkbox" class="custom-control-input" id="customControlValidation1" required="">
+                      <label class="custom-control-label" for="customControlValidation1">I accept the <a href="#">Terms &amp; Conditions</a> and <a href="#">Privacy policy</a></label>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn" name="ApplyBTN">Apply Now</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% include 'layout/master/footer.blade.html' %}
+  </body>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#JobSelection").on("change",function(){
+        var JobID = $(this).val();
+        var CSRF_TOKEN = $("#CSRF_TOKEN").val();
+        $.ajax({
+	        type: "POST",
+	        url: "app/main/ajax/job-data.php",
+	        data: { 
+            job_id: JobID,
+            csrf_token: CSRF_TOKEN
+          },
+	        cache: false,
+	        success: function(DATA){
+	          $("#JobInformations").html(DATA);
+	        }
+
+        });
+
+    });
+});
+</script>

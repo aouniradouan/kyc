@@ -1,0 +1,16 @@
+{
+    "require": {
+        "guzzlehttp/guzzle": "7.0",
+        "nesbot/carbon": "^2.51",
+        "filp/whoops": "^2.14",
+        "nette/database": "^3.1",
+        "verot/class.upload.php": "^2.1",
+        "madeorsk/nocsrf": "^1.1",
+        "pikanji/agent-plugin": "^1.0",
+        "twilio/sdk": "^6.27",
+        "sendgrid/sendgrid": "^7.9",
+        "amitkkhanchandani/faceplusplus": "dev-master",
+        "dompdf/dompdf": "^1.0",
+        "twig/twig": "^3.3"
+    }
+}
