@@ -230,7 +230,6 @@
     width: 100%;
     border: 0;
     border-radius: 5px;
-    height: 60px;
     line-height: 60px;
     padding: 0 25px;
     text-align: left;
@@ -339,7 +338,6 @@
       font-family: "Roboto", sans-serif; }
 
 .ugf-form .input-block .conditions ul {
-  padding: 0;
   margin: 0;
   list-style: none;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -553,7 +551,6 @@
   border-bottom: 0;
   margin-bottom: 25px; }
   .ugf-form .input-block .documents-upload-wrap .nav-tabs .nav-item {
-    margin-bottom: 0;
     margin-right: 20px;
     margin-bottom: 15px; }
     .ugf-form .input-block .documents-upload-wrap .nav-tabs .nav-item:last-child {

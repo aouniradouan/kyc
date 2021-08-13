@@ -104,8 +104,6 @@ class JobApplication {
 
         if ($Response == 1) {
             header("Location: $_SERVER[PHP_SELF]?success=1");
-        }else{
-
         }
 
         
