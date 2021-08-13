@@ -103,7 +103,7 @@ class JobApplication {
         $Response   =   1;
 
         if ($Response == 1) {
-            header("Location: $_SERVER[PHP_SELF]?success=1");
+            echo "<script type='text/javascript'>window.location.replace(' $_SERVER[PHP_SELF]?success=1 ');</script>";
         }
 
         
