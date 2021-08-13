@@ -100,7 +100,15 @@ class JobApplication {
 
         ]);
 
-        header("Location: $_SERVER[PHP_SELF]?success=1");
+        $Response   =   1;
+
+        if ($Response == 1) {
+            header("Location: $_SERVER[PHP_SELF]?success=1");
+        }else{
+
+        }
+
+        
 
     }
 
