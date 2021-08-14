@@ -20,7 +20,7 @@ $APP = [
 
     'APP_VERSION' 		=> '1.0.0',
 
-    'APP_URL' 			=> 'http://localhost/joobi', // NOTE : Don't put the slash at the end  of the URL / if you're install the script in sub category include it in the URL eg exemple.com/sub
+    'APP_URL' 			=> 'http://localhost/kyc', // NOTE : Don't put the slash at the end  of the URL / if you're install the script in sub category include it in the URL eg exemple.com/sub
 
     'ASSET_URL' 		=> NULL,
 

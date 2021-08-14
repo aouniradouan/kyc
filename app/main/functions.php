@@ -71,7 +71,7 @@ function OX_CheckInclude(string $File, string $Include = null){
  */
 function OX_InputSecure($InputData){
 
-	return strip_tags($InputData);
+	return htmlentities( strip_tags( $InputData) );
 
 }
 

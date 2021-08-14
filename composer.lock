@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e218f232074e441e80776f6a243941eb",
+    "content-hash": "82a16e78aba091e3f267854fa8f53c11",
     "packages": [
         {
             "name": "amitkkhanchandani/faceplusplus",
@@ -49,6 +49,58 @@
                 "source": "https://github.com/AmitKKhanchandani/faceplusplus/tree/master"
             },
             "time": "2018-08-14T06:57:25+00:00"
+        },
+        {
+            "name": "atomastic/csrf",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atomastic/csrf.git",
+                "reference": "6ad202f057eb504ee8af4dc3f92f8fcc762b7cbb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atomastic/csrf/zipball/6ad202f057eb504ee8af4dc3f92f8fcc762b7cbb",
+                "reference": "6ad202f057eb504ee8af4dc3f92f8fcc762b7cbb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/coding-standard": "8.2.0",
+                "pestphp/pest": "^1.0.2",
+                "phpstan/phpstan": "^0.12.73"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Atomastic\\Csrf\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Romanenko",
+                    "email": "sergey.romanenko@flextype.org",
+                    "homepage": "https://github.com/Awilum"
+                }
+            ],
+            "description": "Cross Site Request Forgery security component.",
+            "keywords": [
+                "atomastic",
+                "csrf",
+                "php",
+                "security"
+            ],
+            "support": {
+                "issues": "https://github.com/atomastic/csrf/issues",
+                "source": "https://github.com/atomastic/csrf"
+            },
+            "time": "2021-02-09T09:24:30+00:00"
         },
         {
             "name": "composer/installers",
@@ -692,105 +744,6 @@
                 }
             ],
             "time": "2020-06-13T08:05:20+00:00"
-        },
-        {
-            "name": "madeorsk/nocsrf",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Madeorsk/nocsrf.git",
-                "reference": "2ec354d9630e9ae546fe32ce91879b0988ddadd5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Madeorsk/nocsrf/zipball/2ec354d9630e9ae546fe32ce91879b0988ddadd5",
-                "reference": "2ec354d9630e9ae546fe32ce91879b0988ddadd5",
-                "shasum": ""
-            },
-            "require": {
-                "madeorsk/session": "^1.0",
-                "php": ">= 7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "NoCSRF\\": "src/NoCSRF"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Madeorsk",
-                    "email": "madeorsk@protonmail.com",
-                    "homepage": "https://madeorsk.com"
-                }
-            ],
-            "description": "CSRF Protection Library.",
-            "homepage": "https://github.com/madeorsk/csrf",
-            "keywords": [
-                "csrf",
-                "security",
-                "token"
-            ],
-            "support": {
-                "issues": "https://github.com/Madeorsk/nocsrf/issues",
-                "source": "https://github.com/Madeorsk/nocsrf/tree/1.1.1"
-            },
-            "time": "2020-09-21T11:39:08+00:00"
-        },
-        {
-            "name": "madeorsk/session",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Madeorsk/session.git",
-                "reference": "cca1c4d4fd5ab94ae9433238dfa8aa01680aaeba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Madeorsk/session/zipball/cca1c4d4fd5ab94ae9433238dfa8aa01680aaeba",
-                "reference": "cca1c4d4fd5ab94ae9433238dfa8aa01680aaeba",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">= 7.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Session\\": "src/Session"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Madeorsk",
-                    "email": "madeorsk@protonmail.com",
-                    "homepage": "https://madeorsk.com"
-                }
-            ],
-            "description": "Easy session handling in PHP.",
-            "homepage": "https://github.com/madeorsk/session",
-            "keywords": [
-                "session"
-            ],
-            "support": {
-                "issues": "https://github.com/Madeorsk/session/issues",
-                "source": "https://github.com/Madeorsk/session/tree/1.0"
-            },
-            "time": "2020-05-26T10:04:42+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",

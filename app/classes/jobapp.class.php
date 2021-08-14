@@ -30,45 +30,46 @@ class JobApplication {
 
 
 
-
-
     /**
      * Application Function
      *
      * This function insert the Application Data to the database
      *
-     * @param   String      $JOB_Job_id                     Job ID 
-     * @param   String      $JOB_fname                      Job Applyer FirstName
-     * @param   String      $JOB_sname                      Job Applyer Last/Second Name
-     * @param   String      $JOB_Nationality                Job Applyer Nationality
-     * @param   String      $JOB_Birth_Day                  Job Applyer Birthday
-     * @param   String      $JOB_Birth_Month                Job Applyer Birthmonth
-     * @param   String      $JOB_Birth_year                 Job Applyer Birthyear
-     * @param   String      $JOB_Residence_Country          Job Applyer Residence Country
-     * @param   String      $JOB_State                      Job Applyer State
-     * @param   String      $JOB_City                       Job Applyer City
-     * @param   String      $JOB_Zip_Code                   Job Applyer Zip Code
-     * @param   String      $JOB_email                      Job Applyer E-mail
-     * @param   String      $JOB_phone                      Job Applyer Phone Number
-     * @param   String      $JOB_Work_Experience            Job Applyer Work Experience
-     * @param   String      $JOB_Resume                     Job Applyer Resume
-     * @param   String      $JOB_Gender                     Job Applyer Gender
-     *
-     * @param   File        $CvDoc                          Job Applyer CV
-     * @param   File        $CertificateDoc                 Job Applyer Certificates
-     * @param   File        $AchievementDoc                 Job Applyer Achievements
+     * @param   Array      $JobsDATA                     Application Data
      * 
-     * @return  String      $response                       Response if the payment succeced or not
+     * @return  String      $response                    Response is 1 / 0
      *
      * @author Redwan Aouni <aouniradouan@gmail.com>
      */
 
-    public function Apply($JOB_id, $JOB_fname, $JOB_sname, $JOB_Nationality, $JOB_Birth_Day, $JOB_Birth_Month, $JOB_Birth_year, $JOB_Residence_Country, $JOB_State, $JOB_City, $JOB_Zip_Code, $JOB_email, $JOB_phone, $JOB_Work_Experience, $JOB_Resume, $JOB_Gender,$CvDoc, $CertificateDoc, $AchievementDoc){
+    public function Apply(array $JobsDATA){
 
         global $database;
 
+        // Get Data from $JOBDATA Array
+        $JOB_Job_id            =  $JobsDATA['JOB_Job_id'];
+        $JOB_fname             =  $JobsDATA['JOB_fname'];
+        $JOB_sname             =  $JobsDATA['JOB_sname'];
+        $JOB_Nationality       =  $JobsDATA['JOB_Nationality'];
+        $JOB_Birth_Day         =  $JobsDATA['JOB_Birth_Day'];
+        $JOB_Birth_Month       =  $JobsDATA['JOB_Birth_Month'];
+        $JOB_Birth_year        =  $JobsDATA['JOB_Birth_year'];
+        $JOB_Residence_Country =  $JobsDATA['JOB_Residence_Country'];
+        $JOB_State             =  $JobsDATA['JOB_State'];
+        $JOB_City              =  $JobsDATA['JOB_City'];
+        $JOB_Zip_Code          =  $JobsDATA['JOB_Zip_Code'];
+        $JOB_email             =  $JobsDATA['JOB_email'];
+        $JOB_phone             =  $JobsDATA['JOB_phone'];
+        $JOB_Work_Experience   =  $JobsDATA['JOB_Work_Experience'];
+        $JOB_Resume            =  $JobsDATA['JOB_Resume'];
+        $JOB_Gender            =  $JobsDATA['JOB_Gender'];
+        $JOB_Cv_Img            =  $JobsDATA['JOB_Cv_Img'];
+        $JOB_Certificate_Img   =  $JobsDATA['JOB_Certificate_Img'];
+        $JOB_Achievement_Img   =  $JobsDATA['JOB_Achievement_Img'];
 
-        $DocumentsUpload    =   $this->UploadDocuments($CvDoc, $CertificateDoc, $AchievementDoc);
+
+
+        $DocumentsUpload    =   $this->UploadDocuments($JOB_Cv_Img, $JOB_Certificate_Img, $JOB_Achievement_Img);
         $cvPath             =   $DocumentsUpload['cvPath'];
         $CertificatePath    =   $DocumentsUpload['CertificatePath'];
         $AchievementPath    =   $DocumentsUpload['AchievementPath'];
@@ -76,7 +77,7 @@ class JobApplication {
 
         $database->query('INSERT INTO applications', [
             'unique_id'         =>  $this->GenerteCode(),
-            'job_id'            =>  $JOB_id,
+            'job_id'            =>  $JOB_Job_id,
             'fname'             =>  $JOB_fname,
             'sname'             =>  $JOB_sname,
             'nationality'       =>  $JOB_Nationality,
@@ -103,6 +104,7 @@ class JobApplication {
         $Response   =   1;
 
         if ($Response == 1) {
+
             echo "<script type='text/javascript'>window.location.replace(' $_SERVER[PHP_SELF]?success=1 ');</script>";
         }
 
@@ -128,21 +130,22 @@ class JobApplication {
      */
 
     private function UploadDocuments($Cv, $Certificate, $Achievement){
-        global $FILES_SYSTEMS;
+        global $FILES_SYSTEMS,$APP;
 
         $CVDocument             = OX_Uploader($Cv, $FILES_SYSTEMS['storage']['upload']['user']['cv'], $this->GenerteCode() );        
         $CertificateDocument    = OX_Uploader($Certificate, $FILES_SYSTEMS['storage']['upload']['user']['certificate'], $this->GenerteCode() );
         $AchievementDocument    = OX_Uploader($Achievement, $FILES_SYSTEMS['storage']['upload']['user']['achievement'], $this->GenerteCode() );        
         
         return [
-            "cvPath"             => $CVDocument['CompletePath'],
-            "CertificatePath"    => $CertificateDocument['CompletePath'],
-            "AchievementPath"    => $AchievementDocument['CompletePath'],
+            "cvPath"             => $APP['APP_URL']. '/' .$CVDocument['CompletePath'],
+            "CertificatePath"    => $APP['APP_URL']. '/' .$CertificateDocument['CompletePath'],
+            "AchievementPath"    => $APP['APP_URL']. '/' .$AchievementDocument['CompletePath'],
 
         ];
 
 
     }
+
 
 
     /**
@@ -153,8 +156,11 @@ class JobApplication {
      * @author Redwan Aouni <aouniradouan@gmail.com>
      */
     private function GenerteCode(){
+
         return OX_RandomNumber();
+
     }
+
 
 
 

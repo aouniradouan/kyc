@@ -1,0 +1,27 @@
+RewriteEngine on
+
+# Follow symbolic links.
+Options +FollowSymLinks
+
+RewriteBase /kyc/
+
+RewriteCond %{THE_REQUEST} (.*)\.php  
+RewriteRule ^(.*)\.php $1.html [R=301,L]  
+
+RewriteCond %{THE_REQUEST} (.*)\.html  
+RewriteRule ^(.*)\.html $1.php [L]  
+
+
+# Ensure all directory URLs have a trailing slash.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\/$
+RewriteCond %{REQUEST_URI} !\/[^\/]*\.[^\/]+$
+RewriteRule .* http://%{HTTP_HOST}%{REQUEST_URI}/ [L,R=301]
+# Same for HTTPS:
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\/$
+RewriteCond %{REQUEST_URI} !\/[^\/]*\.[^\/]+$
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI}/ [L,R=301]
+
+# Prevent directory listings
+Options All -Indexes

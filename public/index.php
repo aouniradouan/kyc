@@ -10,10 +10,16 @@
 
 
 
-	if ( isset( $_POST['CSRF_TOKEN'] ) ) {
+	if ( isset( $_POST[$csrf->getTokenName()] ) ) {
 
-		// Verify anti-CSRF token.
-		if ( $nocsrf->verify( $_POST['CSRF_TOKEN'] ) ){
+		// Check CSRF
+		if ( !$csrf->isValid( $_POST[$csrf->getTokenName()] ) ) {
+
+		    echo "This looks like a cross-site request forgery.";
+		    exit();
+
+		}else{
+			
 			// Anti-CSRF token is VALID
 			$JOB_Job_id 			=	OX_InputSecure( $_POST['Job-id'] );
 			$JOB_fname 				=	OX_InputSecure( $_POST['fname'] );
@@ -37,14 +43,37 @@
 			$JOB_Achievement_Img  	=	$_FILES['Achievement-Img'];
 
 
+			// Turn the variables to one array
+			$JobsData = array(
+				'JOB_Job_id' 			=> $JOB_Job_id,
+				'JOB_fname' 			=> $JOB_fname,
+				'JOB_sname' 			=> $JOB_sname,
+				'JOB_Nationality' 		=> $JOB_Nationality,
+				'JOB_Birth_Day' 		=> $JOB_Birth_Day,
+				'JOB_Birth_Month' 		=> $JOB_Birth_Month,
+				'JOB_Birth_year' 		=> $JOB_Birth_year,
+				'JOB_Residence_Country' => $JOB_Residence_Country,
+				'JOB_State' 			=> $JOB_State,
+				'JOB_City' 				=> $JOB_City,
+				'JOB_Zip_Code' 			=> $JOB_Zip_Code,
+				'JOB_email' 			=> $JOB_email,
+				'JOB_phone' 			=> $JOB_phone,
+				'JOB_Work_Experience' 	=> $JOB_Work_Experience,
+				'JOB_Resume' 			=> $JOB_Resume,
+				'JOB_Gender' 			=> $JOB_Gender,
+				'JOB_Cv_Img' 			=> $JOB_Cv_Img,
+				'JOB_Certificate_Img' 	=> $JOB_Certificate_Img,
+				'JOB_Achievement_Img' 	=> $JOB_Achievement_Img
+			);
+
+
+
 			$Application = new Joob\Application\JobApplication;
-			$Application->Apply($JOB_Job_id, $JOB_fname, $JOB_sname, $JOB_Nationality, $JOB_Birth_Day, $JOB_Birth_Month, $JOB_Birth_year, $JOB_Residence_Country, $JOB_State, $JOB_City, $JOB_Zip_Code, $JOB_email, $JOB_phone, $JOB_Work_Experience, $JOB_Resume, $JOB_Gender, $JOB_Cv_Img, $JOB_Certificate_Img, $JOB_Achievement_Img);
+			$Application->Apply($JobsData);
 
 
-		}else{
-			// Anti-CSRF token is NOT VALID
-			echo "System detect a CSRF attack";
 		}
+
 
 	}
 
@@ -61,10 +90,15 @@ $Template 	=	$twig->render("index.blade.html",
 		'Nationalitylist' 			=> 	$NationalityList,
 		'Countrieslist' 			=> 	$CountriesList,
 		'Jobslist' 					=> 	$JobsList,
-		'CSRF_TOKEN' 				=>	$CSRF_Token,
+		'CSRF_TOKEN_NAME' 			=>	$CSRF_InputNAME,
+		'CSRF_TOKEN_VALUE' 			=>	$CSRF_InputVALUE,
 		'CheckRequestSuccess' 		=> 	isset( $_GET['success'] )
 	]
 );
+
+
+
+
 
 echo $Template;
 

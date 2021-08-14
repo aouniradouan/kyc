@@ -1,4 +1,7 @@
 <?php
+if( session_status() != PHP_SESSION_ACTIVE ){
+   session_start();
+}
 /**
  * security.php
  *
@@ -12,10 +15,19 @@
  * @since      File available since Release 1.0.0
  */
 
-use NoCSRF\NoCSRF;
-// Creating a new NoCSRF instance, which manages anti-CSRF tokens.
-$nocsrf         =   new NoCSRF();
-// Get an anti-CSRF token
-$CSRF_Token     =   $nocsrf->getToken();
+
+/**
+ * Create the csrf object.
+ *
+ * @param string  $tokenNamePrefix  Prefix for CSRF token name.
+ * @param string  $tokenValuePrefix Prefix for CSRF token value.
+ * @param int     $strength         Strength.
+ *
+ * @throws CsrfException
+ */
+$csrf = new Atomastic\Csrf\Csrf('Joobi_CSRF','JoobiCSRF',32);
+
+$CSRF_InputNAME         =   $csrf->getTokenName();
+$CSRF_InputVALUE        =   $csrf->getTokenValue();
 
 ?>
